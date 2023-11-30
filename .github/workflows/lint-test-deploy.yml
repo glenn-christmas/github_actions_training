@@ -5,6 +5,16 @@ jobs:
     lint:
         runs-on: ubuntu-latest
         steps:
+            - name: checkout code
+              uses: actions/checkout@v3
+            - name: Setup Node.js
+              uses: actions/setup-node@v3
+              with:
+                node-version: 18
+            
+            - name: Install ESLint
+              run: npm install eslint
+
             - name: Lint code
               run: eslint . --ext .js, .jsx, .ts, .tsx
     test:
