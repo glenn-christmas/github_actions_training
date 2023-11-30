@@ -1,0 +1,19 @@
+name: issues-echo
+
+on:
+    issues: 
+        types: [opened]
+
+jobs:
+    echo-issue-metadata:
+        runs-on: ubuntu-latest
+        steps:
+            - name: Checkout code
+              uses: actions/checkout@v3
+
+            - name: Echo Issue Metadata
+              run: |
+                echo "Issue Title: ${{ github.event.issue.title }}"
+                echo "Issue Number: ${{ github.event.issue.number }}"
+                echo "Issue Author: ${{ github.event.issue.user.login }}"
+                echo "Issue URL: ${{ github.event.issue.html_url }}"
