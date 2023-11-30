@@ -3,7 +3,7 @@ name: lint-test-deploy
 on: push
 jobs:
     test:
-        runs-on: unbuntu-latest
+        runs-on: ubuntu-latest
         steps:
             - name: Get code
               uses: actions/checkout@v3
