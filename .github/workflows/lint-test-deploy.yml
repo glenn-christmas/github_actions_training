@@ -2,10 +2,16 @@ name: lint-test-deploy
 
 on: push
 jobs:
-    test:
+    lint:
         runs-on: ubuntu-latest
         steps:
-            - name: Get code
+            - name: Lint code
+              run: eslint . --ext .js, .jsx, .ts, .tsx
+    test:
+        runs-on: ubuntu-latest
+        needs: lint
+        steps:
+            - name: checkout
               uses: actions/checkout@v3
             - name: Install NodeJS
               uses: actions/setup-node@v3
@@ -15,3 +21,15 @@ jobs:
               run: npm ci
             - name: Run tests
               run: npm test
+    build:
+        runs-on: ubuntu-latest
+        needs: test
+        steps:
+            - name: build
+              uses: vitae build
+    deploy:
+        runs-on: ubuntu-latest
+        needs: build
+        steps:
+            - name: deploy
+              run: echo "app has deployed"
