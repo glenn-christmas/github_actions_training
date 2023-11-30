@@ -28,7 +28,7 @@ jobs:
         needs: test
         steps:
             - name: build
-              uses: vite build
+              run: vite build
     deploy:
         runs-on: ubuntu-latest
         needs: build
